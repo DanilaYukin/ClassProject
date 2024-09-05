@@ -1,7 +1,7 @@
 import pytest
 
-from src.category import Category
-from src.product import Product
+from src.main import Category
+from src.main import Product
 
 
 @pytest.fixture()
@@ -39,20 +39,6 @@ def first_category():
     return Category(
         name="Category",
         description="Description of the category",
-        products=[
-            Product(
-                name="Samsung Galaxy S23 Ultra",
-                description="256GB, Серый цвет, 200MP камера",
-                price=180000.0,
-                quantity=5,
-            ),
-            Product(
-                name="Iphone 15",
-                description="512GB, Gray space",
-                price=210000.0,
-                quantity=8,
-            ),
-        ],
     )
 
 
@@ -61,18 +47,4 @@ def second_category():
     return Category(
         name="Second Category",
         description="Description of the Second category",
-        products=[
-            Product(
-                name="Product",
-                description="Description of the product",
-                price=84.50,
-                quantity=10,
-            ),
-            Product(
-                name="Product number two",
-                description="Description of the product number two",
-                price=155.87,
-                quantity=34,
-            ),
-        ],
     )
