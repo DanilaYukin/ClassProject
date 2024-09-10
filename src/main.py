@@ -27,10 +27,15 @@ class Product:
 
 
 class Category:
-    def __init__(self, name: str, description: str):
+    category_count = 0
+    product_count = 0
+
+    def __init__(self, name: str, description: str, ):
         self.name = name
         self.description = description
         self.__products = []
+        Category.category_count += 1
+        Category.product_count += len(self.__products)
 
     def add_product(self, product: Product):
         """Добавляет товар в приватный список товаров"""
@@ -47,5 +52,5 @@ class Category:
 
     def get_products_list(self):
         """Возвращает список товаров в категории в виде строк"""
-        return [f"name: {p.name}, description: {p.description}, price: {p.price}, quantity: {p.quantity}" for p in
+        return [f"{p.name}, {p.price} руб. Остаток: {p.quantity} шт." for p in
                 self.__products]

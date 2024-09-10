@@ -24,7 +24,7 @@ def test_get_products_list(first_category, product_1, product_2):
     first_category.add_product(product_2)
     products_list = first_category.get_products_list()
     expected_output = [
-        'name: Samsung Galaxy S23 Ultra, description: 256GB, Серый цвет, 200MP камера, price: 180000.0, quantity: 5',
-        'name: Iphone 15, description: 512GB, Gray space, price: 210000.0, quantity: 8'
+        'Samsung Galaxy S23 Ultra, 180000.0 руб. Остаток: 5 шт.',
+        'Iphone 15, 210000.0 руб. Остаток: 8 шт.'
     ]
     assert products_list == expected_output
