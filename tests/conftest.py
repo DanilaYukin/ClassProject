@@ -35,16 +35,18 @@ def product_3():
 
 
 @pytest.fixture
-def first_category():
+def first_category(product_1, product_2):
     return Category(
         name="Category",
         description="Description of the category",
+        products=[product_1, product_2]
     )
 
 
 @pytest.fixture
-def second_category():
+def second_category(product_2, product_3, product_1):
     return Category(
         name="Second Category",
         description="Description of the Second category",
+        products=[product_1, product_2, product_3]
     )
