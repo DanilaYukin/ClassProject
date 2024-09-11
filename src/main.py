@@ -5,6 +5,13 @@ class Product:
         self.__price = price
         self.quantity = quantity
 
+    def __str__(self):
+        return f"{self.name}, {self.__price} руб. Остаток: {self.quantity} шт."
+
+    def __add__(self, other):
+        result = int(self.__price) * self.quantity + int(other.__price) * other.quantity
+        return result
+
     @classmethod
     def new_product(cls, product_data: dict):
         return cls(
@@ -26,16 +33,22 @@ class Product:
             self.__price = value
 
 
-class Category:
+class Category():
     category_count = 0
     product_count = 0
 
-    def __init__(self, name: str, description: str, ):
+    def __init__(self, name: str, description: str, products: list):
         self.name = name
         self.description = description
-        self.__products = []
+        self.__products = products
         Category.category_count += 1
         Category.product_count += len(self.__products)
+
+    def __str__(self):
+        result = 0
+        for i in self.__products:
+            result += i.quantity
+        return f"{self.name}, количество продуктов: {result} шт."
 
     def add_product(self, product: Product):
         """Добавляет товар в приватный список товаров"""
@@ -47,7 +60,7 @@ class Category:
         formatted_products = []
         for product in self.__products:
             formatted_products.append(
-                f"{product.name}, {product.price} руб. Остаток: {product.quantity}шт.")
+                f"{product.name}, {product.__price} руб. Остаток: {product.quantity}шт.")
         return "\n".join(formatted_products)
 
     def get_products_list(self):

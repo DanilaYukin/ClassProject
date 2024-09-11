@@ -60,3 +60,11 @@ def test_new_product_creation():
     assert new_product.description == "Latest tablet model"
     assert new_product.price == 600.00
     assert new_product.quantity == 6
+
+
+def test_str_product(product_1):
+    assert Product.__str__(product_1) == "Samsung Galaxy S23 Ultra, 180000.0 руб. Остаток: 5 шт."
+
+
+def test_add_product(product_1, product_2):
+    assert Product.__add__(product_1, product_2) == 2580000
