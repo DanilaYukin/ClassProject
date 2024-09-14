@@ -9,8 +9,10 @@ class Product:
         return f"{self.name}, {self.__price} руб. Остаток: {self.quantity} шт."
 
     def __add__(self, other):
-        result = int(self.__price) * self.quantity + int(other.__price) * other.quantity
-        return result
+        if type(other) == type(self):
+            result = int(self.__price) * self.quantity + int(other.__price) * other.quantity
+            return result
+        raise TypeError
 
     @classmethod
     def new_product(cls, product_data: dict):
@@ -33,7 +35,7 @@ class Product:
             self.__price = value
 
 
-class Category():
+class Category:
     category_count = 0
     product_count = 0
 
@@ -50,9 +52,11 @@ class Category():
             result += i.quantity
         return f"{self.name}, количество продуктов: {result} шт."
 
-    def add_product(self, product: Product):
+    def add_product(self, product):
         """Добавляет товар в приватный список товаров"""
-        self.__products.append(product)
+        if isinstance(type(product), Product):
+            return self.__products.append(product)
+        raise TypeError
 
     @property
     def products(self):
@@ -67,3 +71,39 @@ class Category():
         """Возвращает список товаров в категории в виде строк"""
         return [f"{p.name}, {p.price} руб. Остаток: {p.quantity} шт." for p in
                 self.__products]
+
+
+class Smartphone(Product):
+    name: str
+    description: str
+    price: float
+    quantity: int
+    efficiency: float
+    model: str
+    memory: int
+    color: str
+
+    def __init__(self, name, description, price, quantity, efficiency, model, memory, color):
+        super().__init__(name, description, price, quantity)
+        self.__price = price
+        self.efficiency = efficiency
+        self.model = model
+        self.memory = memory
+        self.color = color
+
+
+class LawnGrass(Product):
+    name: str
+    description: str
+    price: float
+    quantity: int
+    country: str
+    germination_period: str
+    color: str
+
+    def __init__(self, name, description, price, quantity, country, germination_period, color):
+        super().__init__(name, description, price, quantity)
+        self.__price = price
+        self.country = country
+        self.germination_period = germination_period
+        self.color = color
