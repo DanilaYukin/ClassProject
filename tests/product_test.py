@@ -66,5 +66,27 @@ def test_str_product(product_1):
     assert Product.__str__(product_1) == "Samsung Galaxy S23 Ultra, 180000.0 руб. Остаток: 5 шт."
 
 
-def test_add_product(product_1, product_2):
+def test_add_product(product_1, product_2, product_6, product_7):
     assert Product.__add__(product_1, product_2) == 2580000
+    assert Product.__add__(product_6, product_7) == 16750
+
+
+def test_product_6(product_6):
+    assert product_6.name == "Газонная трава"
+    assert product_6.description == "Элитная трава для газона"
+    assert product_6.price == 500.0
+    assert product_6.quantity == 20
+    assert product_6.country == "Россия"
+    assert product_6.germination_period == "7 дней"
+    assert product_6.color == "Зеленый"
+
+
+def test_product_4(product_4):
+    assert product_4.name == "Samsung Galaxy S23 Ultra"
+    assert product_4.description == "256GB, Серый цвет, 200MP камера"
+    assert product_4.price == 180000.0
+    assert product_4.quantity == 5
+    assert product_4.model == "S23 Ultra"
+    assert product_4.efficiency == 95.5
+    assert product_4.memory == 256
+    assert product_4.color == "Серый"
