@@ -1,9 +1,35 @@
-class Product:
+from abc import ABC, abstractmethod
+
+
+class BaseProduct(ABC):
+
+    @abstractmethod
+    def work_class(self):
+        """Функция для отработки пройденного материала"""
+        print("Abstract класс")
+
+
+class MixinLog:
+
+    def __init__(self):
+        print(repr(self))
+        super().__init__()
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}({self.name}, {self.description}, {self.price}, {self.quantity})"
+
+
+class Product(BaseProduct, MixinLog):
     def __init__(self, name: str, description: str, price: float, quantity: int):
         self.name = name
         self.description = description
         self.__price = price
         self.quantity = quantity
+        super().__init__()
+
+    def work_class(self):
+        """Функция для отработки пройденного материала"""
+        print("Product класс")
 
     def __str__(self):
         return f"{self.name}, {self.__price} руб. Остаток: {self.quantity} шт."
@@ -20,7 +46,7 @@ class Product:
             name=product_data.get("name", "Unknown"),
             description=product_data.get("description", ""),
             price=product_data.get("price", 0.0),
-            quantity=product_data.get("quantity", 0)
+            quantity=product_data.get("quantity", 0),
         )
 
     @property
@@ -54,7 +80,7 @@ class Category:
 
     def add_product(self, product):
         """Добавляет товар в приватный список товаров"""
-        if isinstance(type(product), Product):
+        if isinstance(product, Product):
             return self.__products.append(product)
         raise TypeError
 
@@ -63,17 +89,15 @@ class Category:
         """Возвращает список товаров в формате строки"""
         formatted_products = []
         for product in self.__products:
-            formatted_products.append(
-                f"{product.name}, {product.__price} руб. Остаток: {product.quantity}шт.")
+            formatted_products.append(f"{product.name}, {product.__price} руб. Остаток: {product.quantity}шт.")
         return "\n".join(formatted_products)
 
     def get_products_list(self):
         """Возвращает список товаров в категории в виде строк"""
-        return [f"{p.name}, {p.price} руб. Остаток: {p.quantity} шт." for p in
-                self.__products]
+        return [f"{p.name}, {p.price} руб. Остаток: {p.quantity} шт." for p in self.__products]
 
 
-class Smartphone(Product):
+class Smartphone(Product, MixinLog):
     name: str
     description: str
     price: float
@@ -91,8 +115,12 @@ class Smartphone(Product):
         self.memory = memory
         self.color = color
 
+    def work_class(self):
+        """Функция для отработки пройденного материала"""
+        print("Smartphone класс")
 
-class LawnGrass(Product):
+
+class LawnGrass(Product, MixinLog):
     name: str
     description: str
     price: float
@@ -107,3 +135,7 @@ class LawnGrass(Product):
         self.country = country
         self.germination_period = germination_period
         self.color = color
+
+    def work_class(self):
+        """Функция для отработки пройденного материала"""
+        print("LawnGrass класс")
