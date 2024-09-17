@@ -1,3 +1,8 @@
+import pytest
+
+from src.main import Category
+
+
 def test_category(second_category):
     assert second_category.name == "Second Category"
     assert second_category.description == "Description of the Second category"
@@ -9,22 +14,34 @@ def test_category_initialization(first_category):
     assert first_category.description == "Description of the category"
 
 
-def test_add_product_to_category(first_category, product_1, product_2):
+def test_add_product_to_category(first_category):
     """Тест: добавление товаров в категорию"""
-    first_category.add_product(product_1)
-    first_category.add_product(product_2)
     assert len(first_category.get_products_list()) == 2
     assert "Samsung Galaxy S23 Ultra" in first_category.get_products_list()[0]
     assert "Iphone 15" in first_category.get_products_list()[1]
 
 
-def test_get_products_list(first_category, product_1, product_2):
+def test_get_products_list(first_category):
     """Тест: проверка получения списка товаров"""
-    first_category.add_product(product_1)
-    first_category.add_product(product_2)
     products_list = first_category.get_products_list()
     expected_output = [
-        'name: Samsung Galaxy S23 Ultra, description: 256GB, Серый цвет, 200MP камера, price: 180000.0, quantity: 5',
-        'name: Iphone 15, description: 512GB, Gray space, price: 210000.0, quantity: 8'
+        'Samsung Galaxy S23 Ultra, 180000.0 руб. Остаток: 5 шт.',
+        'Iphone 15, 210000.0 руб. Остаток: 8 шт.'
     ]
     assert products_list == expected_output
+
+
+def test_str_category(first_category):
+    assert Category.__str__(first_category) == "Category, количество продуктов: 13 шт."
+
+
+def test_isinstance(second_category):
+    assert len(second_category.get_products_list()) == 3
+    assert "Samsung Galaxy S23 Ultra" in second_category.get_products_list()[1]
+    assert "Iphone 15" in second_category.get_products_list()[0]
+    assert "Xiaomi Redmi Note 11" in second_category.get_products_list()[2]
+
+
+def test_avg_price_products(third_category, first_category):
+    assert Category.avg_price_products(third_category) == 0
+    assert Category.avg_price_products(first_category) == 195000
