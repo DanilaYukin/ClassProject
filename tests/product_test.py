@@ -1,3 +1,5 @@
+import pytest
+
 from src.main import Product
 
 
@@ -90,3 +92,13 @@ def test_product_4(product_4):
     assert product_4.efficiency == 95.5
     assert product_4.memory == 256
     assert product_4.color == "Серый"
+
+
+def test_zero_quantity():
+    with pytest.raises(ValueError):
+        Product.__init__(Product(
+            name="Iphone 15",
+            description="512GB, Gray space",
+            price=210000.0,
+            quantity=0
+        ))

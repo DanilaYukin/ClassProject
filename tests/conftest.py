@@ -103,3 +103,10 @@ def second_category(product_4, product_5, product_3):
         description="Description of the Second category",
         products=[product_5, product_4, product_3]
     )
+
+
+@pytest.fixture
+def third_category():
+    return Category(name="Second Category",
+                    description="Description of the Second category",
+                    products=[])
