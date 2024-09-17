@@ -1,3 +1,5 @@
+import pytest
+
 from src.main import Category
 
 
@@ -38,3 +40,8 @@ def test_isinstance(second_category):
     assert "Samsung Galaxy S23 Ultra" in second_category.get_products_list()[1]
     assert "Iphone 15" in second_category.get_products_list()[0]
     assert "Xiaomi Redmi Note 11" in second_category.get_products_list()[2]
+
+
+def test_avg_price_products(third_category, first_category):
+    assert Category.avg_price_products(third_category) == 0
+    assert Category.avg_price_products(first_category) == 195000
