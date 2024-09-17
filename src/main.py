@@ -6,7 +6,7 @@ class BaseProduct(ABC):
     @abstractmethod
     def work_class(self):
         """Функция для отработки пройденного материала"""
-        print("Abstract класс")
+        print("ABC класс")
 
 
 class MixinLog:
